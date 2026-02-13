@@ -9,6 +9,8 @@ export default function Home() {
   const [showCelebration, setShowCelebration] = useState(false);
   const [hearts, setHearts] = useState([]);
   const [windowSize, setWindowSize] = useState({ width: 0, height: 0 });
+  const [countdown, setCountdown] = useState(5);
+  const [showContent, setShowContent] = useState(false);
 
   useEffect(() => {
     // Set window size on mount and update on resize
@@ -24,6 +26,19 @@ export default function Home() {
     
     return () => window.removeEventListener('resize', updateWindowSize);
   }, []);
+
+  useEffect(() => {
+    // Countdown timer
+    if (countdown > 0) {
+      const timer = setTimeout(() => {
+        setCountdown(countdown - 1);
+      }, 1000);
+      return () => clearTimeout(timer);
+    } else {
+      // eslint-disable-next-line react-hooks/set-state-in-effect
+      setShowContent(true);
+    }
+  }, [countdown]);
 
   const handleNoHover = () => {
     // Get viewport dimensions
@@ -45,7 +60,7 @@ export default function Home() {
   };
 
   const handleCopyCode = () => {
-    navigator.clipboard.writeText('NYKAA2026LOVE');
+    navigator.clipboard.writeText('6002940049167666');
     setCopied(true);
     setTimeout(() => setCopied(false), 2000);
   };
@@ -65,17 +80,30 @@ export default function Home() {
   };
 
   return (
-    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-br from-blue-200 via-red-200 to-blue-300">
-      {/* React Confetti */}
-      {showCelebration && (
-        <Confetti
-          width={windowSize.width}
-          height={windowSize.height}
-          colors={['#ff0080', '#ff4d94', '#ff66a3', '#ff1493', '#dc143c', '#ff69b4', '#ffb6c1']}
-          numberOfPieces={200}
-          recycle={true}
-        />
+    <div className="relative flex min-h-screen items-center justify-center overflow-hidden bg-linear-to-br from-pink-300 via-red-300 to-pink-500/70">
+      {/* Countdown Screen */}
+      {!showContent && (
+        <div className="countdown-screen">
+          <div className="countdown-number">
+            {countdown > 0 ? countdown : '💖'}
+          </div>
+          {countdown === 0 && <p className="countdown-text">Get Ready!</p>}
+        </div>
       )}
+
+      {/* Main Content */}
+      {showContent && (
+        <>
+          {/* React Confetti */}
+          {showCelebration && (
+            <Confetti
+              width={windowSize.width}
+              height={windowSize.height}
+              colors={['#ff0080', '#ff4d94', '#ff66a3', '#ff1493', '#dc143c', '#ff69b4', '#ffb6c1']}
+              numberOfPieces={200}
+              recycle={true}
+            />
+          )}
 
       {/* Instax Style Photos */}
       <div className="instax-photo" style={{ position: 'absolute', top: '5%', left: '5%', transform: 'rotate(8deg)' }}>
@@ -88,7 +116,7 @@ export default function Home() {
         <span className="photo-caption">Our first date, date?😌</span>
       </div>
       
-      <div className="instax-photo" style={{ position: 'absolute', top: '15%', right: '8%', transform: 'rotate(6deg)' }}>
+      <div className="instax-photo" style={{ position: 'absolute', top: '5%', right: '8%', transform: 'rotate(6deg)' }}>
         <Image
           src="/pic2.jpg" 
           alt="Forest path"
@@ -123,27 +151,19 @@ export default function Home() {
       <main className="relative z-10 flex flex-col items-center justify-center px-8 text-center">
         {!showCelebration ? (
           <>
-            {/* <h1 className="mb-12 text-5xl md:text-6xl font-bold text-red-600 drop-shadow-lg animate-pulse">
+            <h1 className="mb-12 text-5xl md:text-6xl font-bold text-red-600 drop-shadow-lg animate-pulse">
               Will you be my valentine<br/>this year and ever after?
-            </h1> */}
-             <h1 className="mb-12 text-5xl md:text-6xl font-bold text-red-600 drop-shadow-lg animate-pulse">
-             some random project that i made for fun and to test my skills in web development and design, 
-             
             </h1>
+             
             <div className="relative w-full max-w-md h-32">
               {/* Yes Button - Fixed Position */}
-              {/* <button
+              
+              <div className='relative flex flex-col gap-1'>  
+              <button
                 onClick={handleYesClick}
                 className="absolute left-1/2 -translate-x-full -ml-4 px-12 py-4 bg-linear-to-r from-red-500 to-blue-500 text-white text-2xl font-bold rounded-full shadow-lg hover:from-red-600 hover:to-pink-600 hover:scale-110 transition-all duration-300 hover:shadow-2xl"
               >
                 Yes! 💕
-              </button> */}
-              <div className='relative flex flex-col gap-1'>  
-               <button
-                onClick={handleYesClick}
-                className="absolute left-1/2 -translate-x-full -ml-4 px-12 py-4 bg-linear-to-r from-red-500 to-pink-500 text-white text-2xl font-bold rounded-full shadow-lg hover:from-red-600 hover:to-pink-600 hover:scale-110 transition-all duration-300 hover:shadow-2xl"
-              >
-                Yes! 
               </button>
               <span className='absolute left-3 text-black'>Try clicking on No, and you&apos;ll see what happens!</span>
               </div>
@@ -195,7 +215,7 @@ export default function Home() {
                     <div className="coupon-code-container">
                       <input 
                         type="text" 
-                        value="NYKAA2026LOVE" 
+                        value="6002940049167666" 
                         readOnly 
                         className="coupon-code-input"
                       />
@@ -206,6 +226,7 @@ export default function Home() {
                         {copied ? '✓ Copied!' : '📋 Copy'}
                       </button>
                     </div>
+                    <p>PIN: 266885</p>
                   </div>
                   
                   <div className="gift-card-footer">
@@ -218,9 +239,65 @@ export default function Home() {
           </div>
         )}
       </main>
+        </>
+      )}
 
       {/* CSS Animations */}
       <style jsx>{`
+        .countdown-screen {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          display: flex;
+          flex-direction: column;
+          justify-content: center;
+          align-items: center;
+          background: linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ff1493 100%);
+          z-index: 9999;
+        }
+        
+        .countdown-number {
+          font-size: 10rem;
+          font-weight: bold;
+          color: white;
+          text-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+          animation: countdownPulse 1s ease-in-out;
+        }
+        
+        .countdown-text {
+          font-size: 2rem;
+          color: white;
+          margin-top: 2rem;
+          animation: fadeIn 0.5s ease-in;
+        }
+        
+        @keyframes countdownPulse {
+          0% {
+            transform: scale(0.5);
+            opacity: 0;
+          }
+          50% {
+            transform: scale(1.2);
+          }
+          100% {
+            transform: scale(1);
+            opacity: 1;
+          }
+        }
+        
+        @keyframes fadeIn {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        
         .gift-card-container {
           display: flex;
           justify-content: center;
@@ -537,7 +614,17 @@ export default function Home() {
         
         @media (max-width: 768px) {
           .instax-photo {
-            display: none;
+            padding: 8px 8px 35px 8px;
+          }
+          
+          .instax-photo img {
+            width: 120px;
+            height: 120px;
+          }
+          
+          .photo-caption {
+            font-size: 10px;
+            bottom: 5px;
           }
           
           .gift-card {
