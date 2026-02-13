@@ -79,43 +79,44 @@ export default function Home() {
 
       {/* Instax Style Photos */}
       <div className="instax-photo" style={{ position: 'absolute', top: '5%', left: '5%', transform: 'rotate(8deg)' }}>
-        <img 
-          src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=400&h=400&fit=crop" 
+        <Image 
+          src="/pic1.jpg" 
           alt="Mountain landscape"
-          // width={180}
-          // height={180}
+          width={150}
+          height={150}
         />
-        <span className="photo-caption">Adventure awaits! 🏔️</span>
+        <span className="photo-caption">Our first date, date?😌</span>
       </div>
       
       <div className="instax-photo" style={{ position: 'absolute', top: '15%', right: '8%', transform: 'rotate(6deg)' }}>
-        <img 
-          src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=400&h=400&fit=crop" 
+        <Image
+          src="/pic2.jpg" 
           alt="Forest path"
-          // width={180}
-          // height={180}
+          width={180}
+          height={180}
         />
-        <span className="photo-caption">Into the woods 🌲</span>
+        <span className="photo-caption">Please always look at me<br/>the same way🥹</span>
       </div>
       
       <div className="instax-photo" style={{ position: 'absolute', bottom: '5%', left: '8%', transform: 'rotate(-20deg)' }}>
-        <img 
-          src="https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=400&h=400&fit=crop" 
+        <Image 
+          src="/pic3.jpg" 
           alt="Sunset nature"
-          // width={180}
-          // height={180}
+          width={180}
+          height={180}
+          className=''
         />
-        <span className="photo-caption">Golden hour ✨</span>
+        <span className="photo-caption">That&apos;s how every new year<br/>should look like🫂</span>
       </div>
       
       <div className="instax-photo" style={{ position: 'absolute', bottom: '10%', right: '6%', transform: 'rotate(-7deg)' }}>
-        <img 
-          src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=400&h=400&fit=crop" 
+        <Image
+          src="/pic4.jpg" 
           alt="Lake and mountains"
-          // width={180}
-          // height={180}
+          width={180}
+          height={180}
         />
-        <span className="photo-caption">Peace & quiet 🌅</span>
+        <span className="photo-caption">I love you noo 👽🥰</span>
       </div>
 
       {/* Main Content */}
@@ -137,12 +138,15 @@ export default function Home() {
               >
                 Yes! 💕
               </button> */}
+              <div className='relative flex flex-col gap-1'>  
                <button
                 onClick={handleYesClick}
                 className="absolute left-1/2 -translate-x-full -ml-4 px-12 py-4 bg-linear-to-r from-red-500 to-pink-500 text-white text-2xl font-bold rounded-full shadow-lg hover:from-red-600 hover:to-pink-600 hover:scale-110 transition-all duration-300 hover:shadow-2xl"
               >
                 Yes! 
               </button>
+              <span className='absolute left-3 text-black'>Try clicking on No, and you&apos;ll see what happens!</span>
+              </div>
               {/* No Button - Dynamic Position */}
               <button
                 onMouseEnter={handleNoHover}
@@ -166,7 +170,7 @@ export default function Home() {
                 Yay! I knew it! 💕
               </h2>
               <p className="text-2xl text-red-500 mb-8">
-                You just made my Valentine&apos;s Day perfect! ❤️
+               Anyways you had no other option 😛😘 
               </p>
             </div>
             
@@ -205,8 +209,8 @@ export default function Home() {
                   </div>
                   
                   <div className="gift-card-footer">
-                    <p className="text-xs text-gray-500">Valid till March 14, 2026</p>
-                    <p className="text-xs text-gray-500">Minimum purchase: ₹999</p>
+                    <p className="text-xs text-gray-500">*Please check its validity</p>
+                    
                   </div>
                 </div>
               </div>
@@ -221,54 +225,194 @@ export default function Home() {
           display: flex;
           justify-content: center;
           margin-top: 2rem;
+          perspective: 1000px;
         }
         
         .gift-card {
-          background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+          background: linear-gradient(135deg, 
+            #ff1493 0%, 
+            #ff69b4 15%, 
+            #ff1493 30%, 
+            #c71585 50%, 
+            #ff1493 70%, 
+            #ff69b4 85%, 
+            #ff1493 100%);
           border-radius: 20px;
-          padding: 3px;
+          padding: 0;
           max-width: 450px;
           width: 100%;
-          box-shadow: 0 10px 40px rgba(255, 20, 147, 0.3);
-          animation: glow 2s ease-in-out infinite alternate;
+          box-shadow: 
+            0 10px 40px rgba(255, 20, 147, 0.5),
+            0 0 60px rgba(255, 105, 180, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4),
+            inset 0 -1px 0 rgba(0, 0, 0, 0.2);
+          animation: cardShine 3s ease-in-out infinite alternate, float 3s ease-in-out infinite;
+          position: relative;
+          overflow: hidden;
+          transform-style: preserve-3d;
         }
         
-        @keyframes glow {
+        .gift-card::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(
+            45deg,
+            transparent 30%,
+            rgba(255, 255, 255, 0.3) 50%,
+            transparent 70%
+          );
+          animation: shine 3s ease-in-out infinite;
+        }
+        
+        @keyframes cardShine {
           from {
-            box-shadow: 0 10px 40px rgba(255, 20, 147, 0.3);
+            box-shadow: 
+              0 10px 40px rgba(255, 20, 147, 0.5),
+              0 0 60px rgba(255, 105, 180, 0.3),
+              inset 0 1px 0 rgba(255, 255, 255, 0.4),
+              inset 0 -1px 0 rgba(0, 0, 0, 0.2);
           }
           to {
-            box-shadow: 0 15px 50px rgba(255, 20, 147, 0.5);
+            box-shadow: 
+              0 15px 50px rgba(255, 20, 147, 0.7),
+              0 0 80px rgba(255, 105, 180, 0.4),
+              inset 0 2px 0 rgba(255, 255, 255, 0.5),
+              inset 0 -2px 0 rgba(0, 0, 0, 0.3);
+          }
+        }
+        
+        @keyframes shine {
+          0% {
+            transform: translateX(-100%) translateY(-100%) rotate(45deg);
+          }
+          100% {
+            transform: translateX(100%) translateY(100%) rotate(45deg);
+          }
+        }
+        
+        @keyframes float {
+          0%, 100% {
+            transform: translateY(0px) rotateX(0deg);
+          }
+          50% {
+            transform: translateY(-10px) rotateX(2deg);
           }
         }
         
         .gift-card-header {
-          background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+          background: linear-gradient(135deg, 
+            rgba(199, 21, 133, 0.9) 0%, 
+            rgba(255, 20, 147, 0.9) 50%,
+            rgba(199, 21, 133, 0.9) 100%);
           padding: 1.5rem;
           border-radius: 18px 18px 0 0;
           text-align: center;
+          position: relative;
+          backdrop-filter: blur(10px);
+          border-bottom: 2px solid rgba(255, 255, 255, 0.3);
+        }
+        
+        .gift-card-header h3 {
+          text-shadow: 
+            0 2px 4px rgba(0, 0, 0, 0.3),
+            0 0 10px rgba(255, 255, 255, 0.2);
         }
         
         .gift-card-body {
-          background: white;
+          background: linear-gradient(135deg, 
+            #2c2c2c 0%, 
+            #3a3a3a 50%, 
+            #2c2c2c 100%);
           padding: 2rem;
           border-radius: 0 0 18px 18px;
           flex-direction: column;
           display: flex;
           align-items: center;
+          position: relative;
+          box-shadow: inset 0 2px 10px rgba(0, 0, 0, 0.3);
+        }
+        
+        .gift-card-body::before {
+          content: '';
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          background: 
+            radial-gradient(circle at 20% 50%, rgba(255, 20, 147, 0.1) 0%, transparent 50%),
+            radial-gradient(circle at 80% 80%, rgba(255, 105, 180, 0.1) 0%, transparent 50%);
+          pointer-events: none;
         }
         
         .coupon-value {
           text-align: center;
           margin-bottom: 1.5rem;
-          padding: 1rem;
-          background: linear-gradient(135deg, #fff0f5 0%, #ffe4e9 100%);
+          padding: 1.5rem 2rem;
+          background: linear-gradient(135deg, 
+            rgba(255, 20, 147, 0.2) 0%, 
+            rgba(255, 105, 180, 0.1) 50%,
+            rgba(255, 20, 147, 0.2) 100%);
           border-radius: 12px;
+          border: 2px solid rgba(255, 20, 147, 0.5);
+          box-shadow: 
+            0 4px 15px rgba(255, 20, 147, 0.3),
+            inset 0 1px 0 rgba(255, 255, 255, 0.1);
+          position: relative;
+          overflow: hidden;
+        }
+        
+        .coupon-value::before {
+          content: '';
+          position: absolute;
+          top: -50%;
+          left: -50%;
+          width: 200%;
+          height: 200%;
+          background: linear-gradient(
+            45deg,
+            transparent 40%,
+            rgba(255, 255, 255, 0.1) 50%,
+            transparent 60%
+          );
+          animation: valueShine 2s ease-in-out infinite;
+        }
+        
+        @keyframes valueShine {
+          0% {
+            transform: translateX(-100%) translateY(-100%);
+          }
+          100% {
+            transform: translateX(100%) translateY(100%);
+          }
+        }
+        
+        .coupon-value span {
+          position: relative;
+          z-index: 1;
+          background: linear-gradient(135deg, #ff1493 0%, #ff69b4 50%, #ff1493 100%);
+          -webkit-background-clip: text;
+          -webkit-text-fill-color: transparent;
+          background-clip: text;
+          filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
         
         .coupon-code-section {
           margin-bottom: 1.5rem;
           text-align: center;
+          width: 100%;
+        }
+        
+        .coupon-code-section p {
+          color: #ff1493;
+          font-weight: 600;
+          text-transform: uppercase;
+          letter-spacing: 1px;
+          font-size: 0.85rem;
         }
         
         .coupon-code-container {
@@ -280,20 +424,26 @@ export default function Home() {
         
         .coupon-code-input {
           padding: 0.75rem 1rem;
-          border: 2px dashed #ff69b4;
+          border: 2px solid rgba(255, 20, 147, 0.6);
           border-radius: 8px;
           font-family: 'Courier New', monospace;
           font-weight: bold;
           font-size: 1rem;
           color: #ff1493;
-          background: #fff0f5;
+          background: linear-gradient(135deg, #1a1a1a 0%, #2a2a2a 100%);
           text-align: center;
-          letter-spacing: 2px;
+          letter-spacing: 3px;
+          box-shadow: 
+            inset 0 2px 8px rgba(0, 0, 0, 0.5),
+            0 0 15px rgba(255, 20, 147, 0.2);
         }
         
         .copy-button {
           padding: 0.75rem 1.25rem;
-          background: linear-gradient(135deg, #ff1493 0%, #ff69b4 100%);
+          background: linear-gradient(135deg, 
+            #ff1493 0%, 
+            #ff69b4 50%, 
+            #ff1493 100%);
           color: white;
           border: none;
           border-radius: 8px;
@@ -301,11 +451,17 @@ export default function Home() {
           cursor: pointer;
           transition: transform 0.2s, box-shadow 0.2s;
           white-space: nowrap;
+          box-shadow: 
+            0 4px 15px rgba(255, 20, 147, 0.4),
+            inset 0 1px 0 rgba(255, 255, 255, 0.3);
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
         }
         
         .copy-button:hover {
           transform: scale(1.05);
-          box-shadow: 0 5px 15px rgba(255, 20, 147, 0.4);
+          box-shadow: 
+            0 6px 20px rgba(255, 20, 147, 0.6),
+            inset 0 1px 0 rgba(255, 255, 255, 0.4);
         }
         
         .copy-button:active {
@@ -315,7 +471,13 @@ export default function Home() {
         .gift-card-footer {
           text-align: center;
           padding-top: 1rem;
-          border-top: 1px dashed #ffb6c1;
+          border-top: 1px solid rgba(255, 20, 147, 0.3);
+          width: 100%;
+        }
+        
+        .gift-card-footer p {
+          color: #ff69b4;
+          text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
         }
         
         .instax-photo {
