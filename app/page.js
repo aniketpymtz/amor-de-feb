@@ -174,7 +174,7 @@ export default function Home() {
             <div className="gift-card-container">
               <div className="gift-card">
                 <div className="gift-card-header">
-                  <h3 className="text-2xl font-bold text-white mb-2">🎁 Special Gift for You!</h3>
+                  <h3 className="text-2xl font-bold text-white mb-2">🎁 Special Gift for You!!</h3>
                   
                 </div>
                 
